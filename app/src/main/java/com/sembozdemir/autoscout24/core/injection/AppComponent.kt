@@ -1,6 +1,7 @@
 package com.sembozdemir.autoscout24.core.injection
 
 import com.sembozdemir.autoscout24.App
+import com.sembozdemir.autoscout24.network.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     AppModule::class,
-    ActivityBuilderModule::class
+    ActivityBuilderModule::class,
+    NetworkModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
 
