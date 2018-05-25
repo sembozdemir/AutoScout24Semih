@@ -6,16 +6,35 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+def API_BASE_URL = "\"https://private-fe87c-simpleclassifieds.apiary-mock.com/\""
+
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         applicationId "com.sembozdemir.autoscout24"
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+
+        local {
+            dimension "default"
+            applicationIdSuffix ".local"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
+        }
+
+        prod  {
+            dimension "default"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,16 +45,43 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibVersion"
+    implementation "com.android.support:design:$rootProject.supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibVersion"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.hannesdorfmann.mosby3:mvp:3.1.0'
-    implementation 'com.google.dagger:dagger-android:2.15'
-    implementation 'com.google.dagger:dagger-android-support:2.15'
-    kapt 'com.google.dagger:dagger-android-processor:2.15'
-    kapt "com.google.dagger:dagger-compiler:2.15"
+    implementation "com.hannesdorfmann.mosby3:mvp:$rootProject.mosbyVersion"
+
+    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
+    implementation "org.jetbrains.anko:anko-commons:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-sdk25:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-support-v4:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-appcompat-v7:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-design:$rootProject.ankoVersion"
+    implementation "org.jetbrains.anko:anko-recyclerview-v7:$rootProject.ankoVersion"
+
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+
+    implementation "com.squareup.moshi:moshi:$rootProject.moshiVersion"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+
 }
