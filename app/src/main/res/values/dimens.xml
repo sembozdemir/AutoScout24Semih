@@ -9,5 +9,6 @@
     <dimen name="space_xxlarge">56dp</dimen>
     <dimen name="space_xxxlarge">72dp</dimen>
     <dimen name="list_item_image_height">200dp</dimen>
+    <dimen name="detail_toolbar_image_height">240dp</dimen>
 
 </resources>

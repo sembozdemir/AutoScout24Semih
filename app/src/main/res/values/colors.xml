@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">@color/orange</color>
 
+    <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="dark_indigo">#0d0b51</color>
     <color name="orange">#FF9800</color>

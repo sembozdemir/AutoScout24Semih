@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
-import com.sembozdemir.autoscout24.network.model.getFullName
+import com.sembozdemir.autoscout24.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_list.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -44,7 +45,9 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     }
 
     private fun navigateToDetail(vehicleItem: VehicleItem) {
-        toast("Clicked on ${vehicleItem.vehicle.getFullName()}")
+        startActivity<DetailActivity>(
+                DetailActivity.EXTRA_VEHICLE to vehicleItem.vehicle
+        )
     }
 
     override fun showVehicles(vehicles: List<VehicleListItem>) {
