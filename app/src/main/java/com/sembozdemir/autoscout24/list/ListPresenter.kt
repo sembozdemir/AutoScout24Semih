@@ -27,9 +27,19 @@ class ListPresenter(
     }
 
     private fun insertAds(vehicles: List<Vehicle>): List<VehicleListItem> {
-        return vehicles.mapIndexed { index, vehicle ->
-            vehicleListItemConverter.getVehicleListItem(index, vehicle)
+
+        val vehicleListItems = mutableListOf<VehicleListItem>()
+
+        vehicles.forEachIndexed { index, vehicle ->
+            val vehicleListItem = vehicleListItemConverter.getVehicleListItem(index, vehicle)
+            vehicleListItems.add(vehicleListItem)
+
+            if (vehicleListItem is AdItem) {
+                vehicleListItems.add(VehicleItem(vehicle))
+            }
         }
+
+        return vehicleListItems
     }
 
 }
