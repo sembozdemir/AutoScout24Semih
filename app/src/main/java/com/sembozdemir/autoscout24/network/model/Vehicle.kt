@@ -31,3 +31,5 @@ data class Vehicle(
         @Json(name = "mileage")
         val mileage: Int? = null
 )
+
+fun Vehicle.getFullName() = "$make $model"

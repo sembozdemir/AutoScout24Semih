@@ -42,4 +42,5 @@ ext {
     rxjavaVersion = '2.1.14'
     rxAndroidVersion = '2.0.2'
     rxkotlinVersion = '2.2.0'
+    picassoVersion = '2.71828'
 }

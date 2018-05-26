@@ -3,6 +3,8 @@ package com.sembozdemir.autoscout24.list
 import com.sembozdemir.autoscout24.network.VehicleRepository
 import com.sembozdemir.autoscout24.network.VehicleRepositoryImpl
 import com.sembozdemir.autoscout24.network.VehicleService
+import com.sembozdemir.autoscout24.util.AdProvider
+import com.sembozdemir.autoscout24.util.AdProviderImpl
 import dagger.Module
 import dagger.Provides
 
@@ -10,10 +12,21 @@ import dagger.Provides
 class ListActivityModule {
 
     @Provides
-    fun provideListPresenter(vehicleRepository: VehicleRepository) = ListPresenter(vehicleRepository)
+    fun provideListPresenter(
+            vehicleRepository: VehicleRepository,
+            vehicleListItemConverter: VehicleListItemConverter
+    ) = ListPresenter(vehicleRepository, vehicleListItemConverter)
 
     @Provides
     fun provideVehicleRepository(vehicleService: VehicleService): VehicleRepository {
         return VehicleRepositoryImpl(vehicleService)
+    }
+
+    @Provides
+    fun provideAdProvider(): AdProvider = AdProviderImpl()
+
+    @Provides
+    fun providerVehicleListItemConverter(adProvider: AdProvider): VehicleListItemConverter {
+        return VehicleListItemConverterImpl(adProvider)
     }
 }
