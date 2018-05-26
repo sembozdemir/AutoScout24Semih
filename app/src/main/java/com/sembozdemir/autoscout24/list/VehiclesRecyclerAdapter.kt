@@ -10,6 +10,8 @@ class VehiclesRecyclerAdapter(
         private val vehicleList: MutableList<VehicleListItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var onItemClickFunc: (vehicleListItem: VehicleListItem) -> Unit = {}
+
     companion object {
         private const val VEHICLE_ITEM_TYPE = 0
         private const val AD_ITEM_TYPE = 1
@@ -33,6 +35,12 @@ class VehiclesRecyclerAdapter(
             is VehicleItemViewHolder -> holder.bind(vehicleList[position] as VehicleItem)
             is AdItemViewHolder -> holder.bind(vehicleList[position] as AdItem)
         }
+
+        holder.itemView.setOnClickListener { onItemClickFunc(vehicleList[position]) }
+    }
+
+    fun onItemClick(func: (vehicleListItem: VehicleListItem) -> Unit) {
+        onItemClickFunc = func
     }
 
     fun updateItems(vehicles: List<VehicleListItem>) {
