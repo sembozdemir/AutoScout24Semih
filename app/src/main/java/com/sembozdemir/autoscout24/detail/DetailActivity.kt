@@ -3,6 +3,7 @@ package com.sembozdemir.autoscout24.detail
 import android.os.Bundle
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
+import com.sembozdemir.autoscout24.extensions.orDash
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.network.model.getFullName
 import com.sembozdemir.autoscout24.photo.PhotoPagerAdapter
@@ -31,7 +32,11 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
 
         initPhotoViewPager()
 
-        detailToolbar.title = vehicle.getFullName()
+        detailTextViewTitle.text = vehicle.getFullName()
+        detailTextViewFuel.text = vehicle.fuel.orDash()
+        detailTextViewMileage.text = vehicle.mileage.toString().orDash()
+        detailTextViewFirstRegistration.text = vehicle.firstRegistration.orDash()
+        detailTextViewPrice.text = vehicle.price.toString() // TODO: format price amount
         detailTextViewDescription.text = vehicle.description
 
     }

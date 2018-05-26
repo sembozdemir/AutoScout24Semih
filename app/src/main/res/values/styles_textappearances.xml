@@ -2,7 +2,7 @@
 <resources>
 
     <style name="TextStyle" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/dark_indigo</item>
     </style>
 
     <style name="TextStyle.14">
@@ -64,10 +64,6 @@
 
     <style name="TextStyle.34.Bold">
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextStyle.34.Bold.DarkIndigo">
-        <item name="android:textColor">@color/dark_indigo</item>
     </style>
 
     <style name="TextStyle.45.Bold">
