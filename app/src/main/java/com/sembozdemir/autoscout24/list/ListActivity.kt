@@ -34,11 +34,12 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
     private fun setupRecyclerView() {
 
-        vehiclesRecyclerAdapter.onItemClick { vehicleListItem, view ->
-            when (vehicleListItem) {
-                is VehicleItem -> navigateToDetail(vehicleListItem, view)
-                is AdItem -> toast("Ad is clicked.")
-            }
+        vehiclesRecyclerAdapter.onVehicleItemClick { vehicleItem, view ->
+            navigateToDetail(vehicleItem, view)
+        }
+
+        vehiclesRecyclerAdapter.onAdItemClick {
+            toast("Ad is clicked.")
         }
 
         with(listRecyclerView) {

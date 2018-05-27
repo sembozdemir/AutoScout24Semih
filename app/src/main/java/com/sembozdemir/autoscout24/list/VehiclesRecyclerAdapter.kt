@@ -12,7 +12,8 @@ class VehiclesRecyclerAdapter(
         private val vehicleList: MutableList<VehicleListItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var onItemClickFunc: (vehicleListItem: VehicleListItem, view: View) -> Unit = { _, _ ->  }
+    private var onVehicleItemClickFunc: (vehicleItem: VehicleItem, view: View) -> Unit = { _, _ ->  }
+    private var onAdItemClickFunc: (adItem: AdItem) -> Unit = { }
 
     companion object {
         private const val VEHICLE_ITEM_TYPE = 0
@@ -26,18 +27,18 @@ class VehiclesRecyclerAdapter(
         is AdItem -> AD_ITEM_TYPE
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val holder =  when (viewType) {
-            VEHICLE_ITEM_TYPE -> VehicleItemViewHolder(parent.inflate(R.layout.list_item_vehicle))
-            AD_ITEM_TYPE -> AdItemViewHolder(parent.inflate(R.layout.list_item_ad))
-            else -> throw IllegalStateException("View type could not be matched.")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
+        VEHICLE_ITEM_TYPE -> VehicleItemViewHolder(parent.inflate(R.layout.list_item_vehicle)).apply {
+            itemView.setOnClickListener {
+                onVehicleItemClickFunc(vehicleList[adapterPosition] as VehicleItem, it.listItemVehicleImageView)
+            }
         }
-
-        holder.itemView.setOnClickListener {
-            onItemClickFunc(vehicleList[holder.adapterPosition], it.listItemVehicleImageView)
+        AD_ITEM_TYPE -> AdItemViewHolder(parent.inflate(R.layout.list_item_ad)).apply {
+            itemView.setOnClickListener {
+                onAdItemClickFunc(vehicleList[adapterPosition] as AdItem)
+            }
         }
-
-        return holder
+        else -> throw IllegalStateException("View type could not be matched.")
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,8 +48,12 @@ class VehiclesRecyclerAdapter(
         }
     }
 
-    fun onItemClick(func: (vehicleListItem: VehicleListItem, view: View) -> Unit) {
-        onItemClickFunc = func
+    fun onVehicleItemClick(func: (vehicleListItem: VehicleItem, view: View) -> Unit) {
+        onVehicleItemClickFunc = func
+    }
+
+    fun onAdItemClick(func: (adItem: AdItem) -> Unit) {
+        onAdItemClickFunc = func
     }
 
     fun updateItems(vehicles: List<VehicleListItem>) {
