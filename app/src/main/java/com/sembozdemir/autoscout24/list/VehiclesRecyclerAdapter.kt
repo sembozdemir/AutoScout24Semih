@@ -26,10 +26,18 @@ class VehiclesRecyclerAdapter(
         is AdItem -> AD_ITEM_TYPE
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        VEHICLE_ITEM_TYPE -> VehicleItemViewHolder(parent.inflate(R.layout.list_item_vehicle))
-        AD_ITEM_TYPE -> AdItemViewHolder(parent.inflate(R.layout.list_item_ad))
-        else -> throw IllegalStateException("View type could not be matched.")
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val holder =  when (viewType) {
+            VEHICLE_ITEM_TYPE -> VehicleItemViewHolder(parent.inflate(R.layout.list_item_vehicle))
+            AD_ITEM_TYPE -> AdItemViewHolder(parent.inflate(R.layout.list_item_ad))
+            else -> throw IllegalStateException("View type could not be matched.")
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClickFunc(vehicleList[holder.adapterPosition], it.listItemVehicleImageView)
+        }
+
+        return holder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -37,8 +45,6 @@ class VehiclesRecyclerAdapter(
             is VehicleItemViewHolder -> holder.bind(vehicleList[position] as VehicleItem)
             is AdItemViewHolder -> holder.bind(vehicleList[position] as AdItem)
         }
-
-        holder.itemView.setOnClickListener { onItemClickFunc(vehicleList[position], it.listItemVehicleImageView) }
     }
 
     fun onItemClick(func: (vehicleListItem: VehicleListItem, view: View) -> Unit) {
