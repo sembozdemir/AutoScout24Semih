@@ -1,6 +1,7 @@
 package com.sembozdemir.autoscout24.detail
 
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.View
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
@@ -9,6 +10,7 @@ import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.network.model.getFullName
 import com.sembozdemir.autoscout24.photo.FullScreenPhotosActivity
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.jetbrains.anko.appcompat.v7.navigationIconResource
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
@@ -41,6 +43,11 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
         detailTextViewPrice.text = vehicle.price.toString() // TODO: format price amount
         detailTextViewDescription.text = vehicle.description
 
+    }
+
+    private fun enableHomeAsUp(toolbar: Toolbar) {
+        toolbar.navigationIconResource = R.drawable.ic_back
+        toolbar.setNavigationOnClickListener { supportFinishAfterTransition() }
     }
 
     private fun initPhotoViewPager() {

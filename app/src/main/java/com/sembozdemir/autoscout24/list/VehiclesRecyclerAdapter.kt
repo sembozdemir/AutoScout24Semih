@@ -1,6 +1,7 @@
 package com.sembozdemir.autoscout24.list
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.extensions.autoNotify
@@ -10,7 +11,7 @@ class VehiclesRecyclerAdapter(
         private val vehicleList: MutableList<VehicleListItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var onItemClickFunc: (vehicleListItem: VehicleListItem) -> Unit = {}
+    private var onItemClickFunc: (vehicleListItem: VehicleListItem, view: View) -> Unit = { _, _ ->  }
 
     companion object {
         private const val VEHICLE_ITEM_TYPE = 0
@@ -36,10 +37,10 @@ class VehiclesRecyclerAdapter(
             is AdItemViewHolder -> holder.bind(vehicleList[position] as AdItem)
         }
 
-        holder.itemView.setOnClickListener { onItemClickFunc(vehicleList[position]) }
+        holder.itemView.setOnClickListener { onItemClickFunc(vehicleList[position], it) }
     }
 
-    fun onItemClick(func: (vehicleListItem: VehicleListItem) -> Unit) {
+    fun onItemClick(func: (vehicleListItem: VehicleListItem, view: View) -> Unit) {
         onItemClickFunc = func
     }
 

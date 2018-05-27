@@ -1,12 +1,15 @@
 package com.sembozdemir.autoscout24.list
 
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
 import com.sembozdemir.autoscout24.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_list.*
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -31,9 +34,9 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
     private fun setupRecyclerView() {
 
-        vehiclesRecyclerAdapter.onItemClick { vehicleListItem ->
+        vehiclesRecyclerAdapter.onItemClick { vehicleListItem, view ->
             when (vehicleListItem) {
-                is VehicleItem -> navigateToDetail(vehicleListItem)
+                is VehicleItem -> navigateToDetail(vehicleListItem, view)
                 is AdItem -> toast("Ad is clicked.")
             }
         }
@@ -44,10 +47,16 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         }
     }
 
-    private fun navigateToDetail(vehicleItem: VehicleItem) {
-        startActivity<DetailActivity>(
+    private fun navigateToDetail(vehicleItem: VehicleItem, view: View) {
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this, view, getString(R.string.transition_detail_photo)
+        )
+
+        val intent = intentFor<DetailActivity>(
                 DetailActivity.EXTRA_VEHICLE to vehicleItem.vehicle
         )
+
+        ActivityCompat.startActivity(this, intent, options.toBundle())
     }
 
     override fun showVehicles(vehicles: List<VehicleListItem>) {

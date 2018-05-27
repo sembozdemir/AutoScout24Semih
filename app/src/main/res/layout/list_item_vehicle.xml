@@ -19,7 +19,9 @@
                 android:id="@+id/listItemVehicleImageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/list_item_image_height"
-                tools:src="@drawable/ic_placeholder_vehicle"/>
+                tools:src="@drawable/ic_placeholder_vehicle"
+                android:transitionName="@string/transition_detail_photo"
+                tools:targetApi="lollipop"/>
 
             <TextView
                 android:id="@+id/listItemVehicleTextViewTitle"
