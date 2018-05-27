@@ -44,5 +44,6 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
     private fun initPhotoViewPager() {
         val imageUrls = vehicle.images?.map { it?.url }
         detailViewPagerPhotos.adapter = PhotoPagerAdapter(supportFragmentManager, imageUrls, zoomEnabled = false)
+        detailCircleIndicator.setViewPager(detailViewPagerPhotos)
     }
 }

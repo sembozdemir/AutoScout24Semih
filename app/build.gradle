@@ -93,4 +93,6 @@ dependencies {
 
     implementation "com.github.chrisbanes:PhotoView:$rootProject.photoViewVersion"
 
+    implementation "me.relex:circleindicator:$rootProject.circleIndicatorVersion@aar"
+
 }
