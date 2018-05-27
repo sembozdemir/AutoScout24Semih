@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
+import com.sembozdemir.autoscout24.extensions.asFormattedAmount
 import com.sembozdemir.autoscout24.extensions.orDash
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.network.model.getFullName
@@ -40,7 +41,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
         detailTextViewFuel.text = vehicle.fuel.orDash()
         detailTextViewMileage.text = vehicle.mileage.toString().orDash()
         detailTextViewFirstRegistration.text = vehicle.firstRegistration.orDash()
-        detailTextViewPrice.text = vehicle.price.toString() // TODO: format price amount
+        detailTextViewPrice.text = getString(R.string.euro_currency_format, vehicle.price?.asFormattedAmount().orDash())
         detailTextViewDescription.text = vehicle.description
 
     }
