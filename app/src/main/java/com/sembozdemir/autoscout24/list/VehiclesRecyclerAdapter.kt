@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.extensions.autoNotify
 import com.sembozdemir.autoscout24.extensions.inflate
+import kotlinx.android.synthetic.main.list_item_vehicle.view.*
 
 class VehiclesRecyclerAdapter(
         private val vehicleList: MutableList<VehicleListItem>
@@ -37,7 +38,7 @@ class VehiclesRecyclerAdapter(
             is AdItemViewHolder -> holder.bind(vehicleList[position] as AdItem)
         }
 
-        holder.itemView.setOnClickListener { onItemClickFunc(vehicleList[position], it) }
+        holder.itemView.setOnClickListener { onItemClickFunc(vehicleList[position], it.listItemVehicleImageView) }
     }
 
     fun onItemClick(func: (vehicleListItem: VehicleListItem, view: View) -> Unit) {
