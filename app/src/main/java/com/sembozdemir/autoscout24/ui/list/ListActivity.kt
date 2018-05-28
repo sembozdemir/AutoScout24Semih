@@ -63,7 +63,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     }
 
     private fun navigateToDetail(vehicleItem: VehicleItem, sharedView: View) {
-        listNavigator.navigateToDetail(vehicleItem, sharedView)
+        listNavigator.navigateToDetail(vehicleItem.vehicle, sharedView)
     }
 
     override fun showVehicles(vehicles: List<VehicleListItem>) {

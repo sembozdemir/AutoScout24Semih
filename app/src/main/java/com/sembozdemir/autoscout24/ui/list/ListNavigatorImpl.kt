@@ -5,6 +5,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
 import com.sembozdemir.autoscout24.R
+import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.ui.detail.DetailActivity
 import org.jetbrains.anko.intentFor
 
@@ -20,7 +21,7 @@ class ListNavigatorImpl : ListNavigator {
         activity = null
     }
 
-    override fun navigateToDetail(vehicleItem: VehicleItem, sharedView: View) {
+    override fun navigateToDetail(vehicle: Vehicle, sharedView: View) {
         activity?.let {
 
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -28,7 +29,7 @@ class ListNavigatorImpl : ListNavigator {
             )
 
             val intent = it.intentFor<DetailActivity>(
-                    DetailActivity.EXTRA_VEHICLE to vehicleItem.vehicle
+                    DetailActivity.EXTRA_VEHICLE to vehicle
             )
 
             ActivityCompat.startActivity(it, intent, options.toBundle())

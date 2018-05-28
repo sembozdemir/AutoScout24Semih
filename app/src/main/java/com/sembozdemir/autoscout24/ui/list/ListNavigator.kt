@@ -1,13 +1,10 @@
 package com.sembozdemir.autoscout24.ui.list
 
-import android.app.Activity
 import android.view.View
+import com.sembozdemir.autoscout24.core.Navigator
+import com.sembozdemir.autoscout24.network.model.Vehicle
 
-interface ListNavigator {
+interface ListNavigator : Navigator {
 
-    fun bind(activity: Activity)
-
-    fun unbind()
-
-    fun navigateToDetail(vehicleItem: VehicleItem, sharedView: View)
+    fun navigateToDetail(vehicle: Vehicle, sharedView: View)
 }

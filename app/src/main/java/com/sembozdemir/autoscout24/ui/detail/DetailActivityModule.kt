@@ -7,6 +7,6 @@ import dagger.Provides
 class DetailActivityModule {
 
     @Provides
-    fun provideDetailPresenter(): DetailPresenter = DetailPresenter()
+    fun provideDetailNavigator(): DetailNavigator = DetailNavigatorImpl()
 
 }
