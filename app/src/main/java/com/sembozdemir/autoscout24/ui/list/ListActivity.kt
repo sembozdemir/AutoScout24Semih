@@ -1,10 +1,13 @@
 package com.sembozdemir.autoscout24.ui.list
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
+import com.sembozdemir.autoscout24.extensions.action
+import com.sembozdemir.autoscout24.extensions.snack
 import kotlinx.android.synthetic.main.activity_list.*
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.toast
@@ -32,6 +35,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         setupSwipeRefreshLayout()
         setupRecyclerView()
 
+        listSwipeRefreshLayout.isRefreshing = true
         presenter.loadVehicles()
     }
 
@@ -69,5 +73,15 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     override fun showVehicles(vehicles: List<VehicleListItem>) {
         listSwipeRefreshLayout.isRefreshing = false
         vehiclesRecyclerAdapter.updateItems(vehicles)
+    }
+
+    override fun showError() {
+        listSwipeRefreshLayout.isRefreshing = false
+        listLinearLayoutRoot.snack(R.string.general_error, Snackbar.LENGTH_INDEFINITE) {
+            action(R.string.retry) {
+                listSwipeRefreshLayout.isRefreshing = true
+                presenter.refreshVehicles()
+            }
+        }
     }
 }

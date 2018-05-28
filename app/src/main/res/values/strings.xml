@@ -2,4 +2,6 @@
     <string name="app_name">AutoScout24-Semih</string>
     <string name="list_title">Vehicles</string>
     <string name="euro_currency_format">€%s</string>
+    <string name="general_error">Oops! Something went wrong :(</string>
+    <string name="retry">Retry</string>
 </resources>

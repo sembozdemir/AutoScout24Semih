@@ -38,6 +38,7 @@ class ListPresenter(
                         },
                         onError = {
                             Timber.e(it)
+                            ifViewAttached { it.showError() }
                         }
                 ).also { compositeDisposable.add(it) }
     }
