@@ -1,5 +1,6 @@
-package com.sembozdemir.autoscout24.network
+package com.sembozdemir.autoscout24.repository
 
+import com.sembozdemir.autoscout24.network.VehicleService
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.network.model.toVehicleEntity
 import com.sembozdemir.autoscout24.persistance.VehicleDao

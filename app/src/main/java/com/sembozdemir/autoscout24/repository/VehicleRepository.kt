@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.network
+package com.sembozdemir.autoscout24.repository
 
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import io.reactivex.Single

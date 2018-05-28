@@ -1,7 +1,7 @@
 package com.sembozdemir.autoscout24.list
 
-import com.sembozdemir.autoscout24.network.VehicleRepository
-import com.sembozdemir.autoscout24.network.VehicleRepositoryImpl
+import com.sembozdemir.autoscout24.repository.VehicleRepository
+import com.sembozdemir.autoscout24.repository.VehicleRepositoryImpl
 import com.sembozdemir.autoscout24.network.VehicleService
 import com.sembozdemir.autoscout24.persistance.VehicleDao
 import com.sembozdemir.autoscout24.util.AdProvider

@@ -1,7 +1,7 @@
 package com.sembozdemir.autoscout24.list
 
 import com.sembozdemir.autoscout24.core.BasePresenter
-import com.sembozdemir.autoscout24.network.VehicleRepository
+import com.sembozdemir.autoscout24.repository.VehicleRepository
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
