@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".list.ListActivity">
+        <activity android:name="com.sembozdemir.autoscout24.ui.list.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".detail.DetailActivity"
+            android:name="com.sembozdemir.autoscout24.ui.detail.DetailActivity"
             android:theme="@style/AppTheme.TranslucentStatus"/>
         <activity
-            android:name=".photo.FullScreenPhotosActivity"
+            android:name="com.sembozdemir.autoscout24.ui.photo.FullScreenPhotosActivity"
             android:theme="@style/AppTheme.FullScreen"/>
     </application>
 

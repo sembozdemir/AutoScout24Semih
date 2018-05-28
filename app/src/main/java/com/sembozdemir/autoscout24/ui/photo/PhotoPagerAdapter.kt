@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.photo
+package com.sembozdemir.autoscout24.ui.photo
 
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter

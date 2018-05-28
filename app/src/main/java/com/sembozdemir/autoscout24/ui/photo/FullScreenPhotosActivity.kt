@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.photo
+package com.sembozdemir.autoscout24.ui.photo
 
 import android.os.Bundle
 import com.sembozdemir.autoscout24.R

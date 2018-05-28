@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.list
+package com.sembozdemir.autoscout24.ui.list
 
 import com.sembozdemir.autoscout24.core.BaseView
 

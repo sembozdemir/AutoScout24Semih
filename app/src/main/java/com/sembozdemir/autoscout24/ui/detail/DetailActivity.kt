@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.detail
+package com.sembozdemir.autoscout24.ui.detail
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
@@ -9,7 +9,7 @@ import com.sembozdemir.autoscout24.extensions.asFormattedAmount
 import com.sembozdemir.autoscout24.extensions.orDash
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.network.model.getFullName
-import com.sembozdemir.autoscout24.photo.FullScreenPhotosActivity
+import com.sembozdemir.autoscout24.ui.photo.FullScreenPhotosActivity
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.appcompat.v7.navigationIconResource
 import org.jetbrains.anko.startActivity

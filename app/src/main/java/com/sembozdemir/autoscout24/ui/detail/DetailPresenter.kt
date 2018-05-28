@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.detail
+package com.sembozdemir.autoscout24.ui.detail
 
 import com.sembozdemir.autoscout24.core.BasePresenter
 

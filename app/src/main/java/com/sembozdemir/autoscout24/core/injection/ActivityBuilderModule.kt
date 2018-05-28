@@ -1,9 +1,9 @@
 package com.sembozdemir.autoscout24.core.injection
 
-import com.sembozdemir.autoscout24.detail.DetailActivity
-import com.sembozdemir.autoscout24.detail.DetailActivityModule
-import com.sembozdemir.autoscout24.list.ListActivity
-import com.sembozdemir.autoscout24.list.ListActivityModule
+import com.sembozdemir.autoscout24.ui.detail.DetailActivity
+import com.sembozdemir.autoscout24.ui.detail.DetailActivityModule
+import com.sembozdemir.autoscout24.ui.list.ListActivity
+import com.sembozdemir.autoscout24.ui.list.ListActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

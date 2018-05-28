@@ -1,4 +1,4 @@
-package com.sembozdemir.autoscout24.list
+package com.sembozdemir.autoscout24.ui.list
 
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.sembozdemir.autoscout24.R
 import com.sembozdemir.autoscout24.core.BaseActivity
-import com.sembozdemir.autoscout24.detail.DetailActivity
+import com.sembozdemir.autoscout24.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.support.v4.onRefresh
