@@ -10,6 +10,7 @@ import com.sembozdemir.autoscout24.core.BaseActivity
 import com.sembozdemir.autoscout24.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_list.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -27,9 +28,16 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setupSwipeRefreshLayout()
         setupRecyclerView()
 
         presenter.loadVehicles()
+    }
+
+    private fun setupSwipeRefreshLayout() {
+        listSwipeRefreshLayout.onRefresh {
+            presenter.refreshVehicles()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -61,6 +69,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     }
 
     override fun showVehicles(vehicles: List<VehicleListItem>) {
+        listSwipeRefreshLayout.isRefreshing = false
         vehiclesRecyclerAdapter.updateItems(vehicles)
     }
 }

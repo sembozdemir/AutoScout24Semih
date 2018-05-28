@@ -46,4 +46,5 @@ ext {
     picassoVersion = '2.71828'
     photoViewVersion = '2.1.3'
     circleIndicatorVersion = '1.2.2'
+    roomVersion = '1.1.0'
 }

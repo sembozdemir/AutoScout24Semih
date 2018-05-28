@@ -3,7 +3,9 @@ package com.sembozdemir.autoscout24.list
 import com.sembozdemir.autoscout24.core.BasePresenter
 import com.sembozdemir.autoscout24.network.VehicleRepository
 import com.sembozdemir.autoscout24.network.model.Vehicle
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class ListPresenter(
@@ -13,6 +15,8 @@ class ListPresenter(
 
     fun loadVehicles() {
         vehicleRepository.fetchVehicles()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .map { insertAds(it) }
                 .subscribeBy(
                         onSuccess = { vehicleListItems ->
@@ -40,6 +44,23 @@ class ListPresenter(
         }
 
         return vehicleListItems
+    }
+
+    fun refreshVehicles() {
+        vehicleRepository.fetchVehiclesFreshly()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { insertAds(it) }
+                .subscribeBy(
+                        onSuccess = { vehicleListItems ->
+                            if (vehicleListItems.isNotEmpty()) {
+                                ifViewAttached { it.showVehicles(vehicleListItems) }
+                            }
+                        },
+                        onError = {
+                            Timber.e(it)
+                        }
+                )
     }
 
 }

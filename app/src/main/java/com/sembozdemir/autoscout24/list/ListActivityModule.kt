@@ -3,6 +3,7 @@ package com.sembozdemir.autoscout24.list
 import com.sembozdemir.autoscout24.network.VehicleRepository
 import com.sembozdemir.autoscout24.network.VehicleRepositoryImpl
 import com.sembozdemir.autoscout24.network.VehicleService
+import com.sembozdemir.autoscout24.persistance.VehicleDao
 import com.sembozdemir.autoscout24.util.AdProvider
 import com.sembozdemir.autoscout24.util.AdProviderImpl
 import dagger.Module
@@ -18,8 +19,8 @@ class ListActivityModule {
     ) = ListPresenter(vehicleRepository, vehicleListItemConverter)
 
     @Provides
-    fun provideVehicleRepository(vehicleService: VehicleService): VehicleRepository {
-        return VehicleRepositoryImpl(vehicleService)
+    fun provideVehicleRepository(vehicleService: VehicleService, vehicleDao: VehicleDao): VehicleRepository {
+        return VehicleRepositoryImpl(vehicleService, vehicleDao)
     }
 
     @Provides

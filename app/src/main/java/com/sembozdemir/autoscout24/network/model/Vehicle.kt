@@ -1,11 +1,15 @@
 package com.sembozdemir.autoscout24.network.model
 
 import android.os.Parcelable
+import com.sembozdemir.autoscout24.persistance.entity.VehicleEntity
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Vehicle(
+
+        @Json(name = "id")
+        val id: Int? = null,
 
         @Json(name = "images")
         val images: List<Image?>? = null,
@@ -22,9 +26,6 @@ data class Vehicle(
         @Json(name = "model")
         val model: String? = null,
 
-        @Json(name = "id")
-        val id: Int? = null,
-
         @Json(name = "make")
         val make: String? = null,
 
@@ -36,3 +37,15 @@ data class Vehicle(
 ) : Parcelable
 
 fun Vehicle.getFullName() = "$make $model"
+
+fun Vehicle.toVehicleEntity() = VehicleEntity(
+        id,
+        images?.map { it?.url },
+        price,
+        fuel,
+        description,
+        model,
+        make,
+        firstRegistration,
+        mileage
+)

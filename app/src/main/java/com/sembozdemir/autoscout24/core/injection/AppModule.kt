@@ -1,7 +1,7 @@
 package com.sembozdemir.autoscout24.core.injection
 
-import android.app.Application
 import android.content.Context
+import com.sembozdemir.autoscout24.App
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -11,5 +11,5 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideContext(application: Application): Context = application.applicationContext
+    fun provideContext(application: App): Context = application.applicationContext
 }
