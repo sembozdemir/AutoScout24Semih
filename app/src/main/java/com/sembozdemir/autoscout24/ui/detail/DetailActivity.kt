@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.sembozdemir.autoscout24.R
-import com.sembozdemir.autoscout24.core.BaseSimpleActivity
+import com.sembozdemir.autoscout24.core.BaseActivity
 import com.sembozdemir.autoscout24.extensions.asFormattedAmount
 import com.sembozdemir.autoscout24.extensions.orDash
 import com.sembozdemir.autoscout24.network.model.Vehicle
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.appcompat.v7.navigationIconResource
 import javax.inject.Inject
 
-class DetailActivity : BaseSimpleActivity() {
+class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
 
     companion object {
         const val EXTRA_VEHICLE = "vehicle"
@@ -23,6 +23,11 @@ class DetailActivity : BaseSimpleActivity() {
 
     @Inject
     lateinit var detailNavigator: DetailNavigator
+
+    @Inject
+    lateinit var detailPresenter: DetailPresenter
+
+    override fun createPresenter() = detailPresenter
 
     override fun getLayoutResId() = R.layout.activity_detail
 
@@ -62,8 +67,12 @@ class DetailActivity : BaseSimpleActivity() {
         vehicle.images?.let {
             detailImageViewFullScreen.visibility = View.VISIBLE
             detailImageViewFullScreen.setOnClickListener {
-                detailNavigator.navigateFullScreenPhoto(imageUrls, detailViewPagerPhotos.currentItem)
+                presenter.onFullScreenModeWanted(imageUrls, detailViewPagerPhotos.currentItem)
             }
         }
+    }
+
+    override fun showFullScreenMode(imageUrls: List<String>, currentItemIndex: Int) {
+        detailNavigator.navigateFullScreenPhoto(imageUrls, currentItemIndex)
     }
 }

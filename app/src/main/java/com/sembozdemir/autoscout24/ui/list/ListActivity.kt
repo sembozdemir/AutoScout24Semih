@@ -53,7 +53,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     private fun setupRecyclerView() {
 
         vehiclesRecyclerAdapter.onVehicleItemClick { vehicleItem, view ->
-            navigateToDetail(vehicleItem, view)
+            presenter.onVehicleItemSelected(vehicleItem, view)
         }
 
         vehiclesRecyclerAdapter.onAdItemClick {
@@ -66,7 +66,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         }
     }
 
-    private fun navigateToDetail(vehicleItem: VehicleItem, sharedView: View) {
+    override fun navigateToDetail(vehicleItem: VehicleItem, sharedView: View) {
         listNavigator.navigateToDetail(vehicleItem.vehicle, sharedView)
     }
 
