@@ -3,6 +3,7 @@ package com.sembozdemir.autoscout24.ui.list
 import com.sembozdemir.autoscout24.core.BasePresenter
 import com.sembozdemir.autoscout24.network.model.Vehicle
 import com.sembozdemir.autoscout24.repository.VehicleRepository
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -17,24 +18,15 @@ class ListPresenter(
     private val compositeDisposable = CompositeDisposable()
 
     fun loadVehicles() {
-        vehicleRepository.fetchVehicles()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { insertAds(it) }
-                .subscribeBy(
-                        onSuccess = { vehicleListItems ->
-                            if (vehicleListItems.isNotEmpty()) {
-                                ifViewAttached { it.showVehicles(vehicleListItems) }
-                            }
-                        },
-                        onError = {
-                            Timber.e(it)
-                        }
-                ).also { compositeDisposable.add(it) }
+        useVehicleRepository { fetchVehicles() }
     }
 
     fun refreshVehicles() {
-        vehicleRepository.fetchVehiclesFreshly()
+        useVehicleRepository { fetchVehiclesFreshly() }
+    }
+
+    private fun useVehicleRepository(func: VehicleRepository.() -> Single<List<Vehicle>>) {
+        vehicleRepository.func()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { insertAds(it) }
