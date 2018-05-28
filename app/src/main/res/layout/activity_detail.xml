@@ -154,6 +154,11 @@
                 android:textAppearance="@style/TextStyle.20"
                 tools:text="BMW 116i. No accident"/>
 
+            <!-- dummy view to guarantee collapsing while scrolling -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_toolbar_image_height"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
