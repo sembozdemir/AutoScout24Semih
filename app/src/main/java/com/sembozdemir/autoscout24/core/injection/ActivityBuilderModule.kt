@@ -4,6 +4,7 @@ import com.sembozdemir.autoscout24.ui.detail.DetailActivity
 import com.sembozdemir.autoscout24.ui.detail.DetailActivityModule
 import com.sembozdemir.autoscout24.ui.list.ListActivity
 import com.sembozdemir.autoscout24.ui.list.ListActivityModule
+import com.sembozdemir.autoscout24.ui.photo.FullScreenPhotosActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,4 +16,7 @@ abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector(modules = [DetailActivityModule::class])
     abstract fun bindDetailActivity(): DetailActivity
+
+    @ContributesAndroidInjector()
+    abstract fun bindFullScreenPhotosActivity(): FullScreenPhotosActivity
 }
