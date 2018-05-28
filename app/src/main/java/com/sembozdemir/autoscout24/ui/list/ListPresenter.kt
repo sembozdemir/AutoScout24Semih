@@ -1,9 +1,10 @@
 package com.sembozdemir.autoscout24.ui.list
 
 import com.sembozdemir.autoscout24.core.BasePresenter
-import com.sembozdemir.autoscout24.repository.VehicleRepository
 import com.sembozdemir.autoscout24.network.model.Vehicle
+import com.sembozdemir.autoscout24.repository.VehicleRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -12,6 +13,8 @@ class ListPresenter(
         private val vehicleRepository: VehicleRepository,
         private val vehicleListItemConverter: VehicleListItemConverter
 ) : BasePresenter<ListView>() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     fun loadVehicles() {
         vehicleRepository.fetchVehicles()
@@ -27,7 +30,24 @@ class ListPresenter(
                         onError = {
                             Timber.e(it)
                         }
-                )
+                ).also { compositeDisposable.add(it) }
+    }
+
+    fun refreshVehicles() {
+        vehicleRepository.fetchVehiclesFreshly()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { insertAds(it) }
+                .subscribeBy(
+                        onSuccess = { vehicleListItems ->
+                            if (vehicleListItems.isNotEmpty()) {
+                                ifViewAttached { it.showVehicles(vehicleListItems) }
+                            }
+                        },
+                        onError = {
+                            Timber.e(it)
+                        }
+                ).also { compositeDisposable.add(it) }
     }
 
     private fun insertAds(vehicles: List<Vehicle>): List<VehicleListItem> {
@@ -46,21 +66,9 @@ class ListPresenter(
         return vehicleListItems
     }
 
-    fun refreshVehicles() {
-        vehicleRepository.fetchVehiclesFreshly()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { insertAds(it) }
-                .subscribeBy(
-                        onSuccess = { vehicleListItems ->
-                            if (vehicleListItems.isNotEmpty()) {
-                                ifViewAttached { it.showVehicles(vehicleListItems) }
-                            }
-                        },
-                        onError = {
-                            Timber.e(it)
-                        }
-                )
+    override fun detachView() {
+        compositeDisposable.clear()
+        super.detachView()
     }
 
 }
